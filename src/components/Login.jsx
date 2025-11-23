@@ -34,7 +34,26 @@ const action = searchParams.get("action");
             return console.error("Itna easy password")
         }
 
-        
+    // Check for uppercase
+    if (!/[A-Z]/.test(password)) {
+        return console.error("Uppercase letter bhi daal bhai (A-Z)!");
+    }
+
+    // Check for lowercase
+    if (!/[a-z]/.test(password)) {
+        return console.error("Lowercase letter bhi zaroori hai (a-z)!");
+    }
+
+    // Check for number
+    if (!/[0-9]/.test(password)) {
+        return console.error("Number bhi daal (0-9)!");
+    }
+
+    // Check for special character
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        return console.error("Ek special character bhi chahiye (!, @, #, etc.)");
+    }
+
         
 
         if (action === "signup") {
@@ -71,7 +90,6 @@ const action = searchParams.get("action");
         }
         
         console.log("")
-
        
 
 
