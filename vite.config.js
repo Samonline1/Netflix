@@ -5,7 +5,7 @@ import { copyFileSync, existsSync } from 'fs'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/Netflix/',
+  base: '/',
   plugins: [
     react(),
     tailwindcss(),
