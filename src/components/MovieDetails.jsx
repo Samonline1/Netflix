@@ -97,7 +97,7 @@ const MovieDetails = () => {
                     )}
                 </div>
 
-                <div className="relative flex flex-col justify-center z-10 gap-5 space-y-3 h-full w-screen text-white bg-black/60 p-15">
+                <div className="relative flex flex-col justify-center z-10 gap-5 space-y-3 h-full w-screen text-white bg-black/60 p-5 pt-15 lg:p-15">
 
 
                     <SearchNav/>
@@ -138,7 +138,7 @@ const MovieDetails = () => {
                                     }
                                     className="flex flex-col items-center gap-2 h-60 w-50"
                                 >
-                                    <div className="h-40 w-40 ">
+                                    <div className="lg:h-40 lg:w-40 h-20 w-20 ">
                                         <img
                                             key={cast.person.id}
                                             className="w-full h-full object-cover object-top rounded-[50%] bg-red-700"
@@ -155,7 +155,7 @@ const MovieDetails = () => {
                                     </div>
 
                                     <p
-                                        className="font-bold"
+                                        className="font-bold text-sm lg:text-lg"
                                         onMouseEnter={() => setHover(true)}
                                         onMouseLeave={() => setHover(false)}
                                     >

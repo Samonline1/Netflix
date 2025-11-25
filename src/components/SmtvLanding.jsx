@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-useNavigate
+useNavigate;
 
 const SmtvLanding = () => {
     const navigate = useNavigate();
@@ -89,16 +89,16 @@ const SmtvLanding = () => {
     };
     return (
         <>
-            <div className="w-full h-full">
+            <div className="w-full h-full ">
                 <div
-                    className='relative w-full h-[100vh] inset-0 bg-cover bg-center w-full
+                    className='relative w-screen h-[100vh] inset-0 bg-cover bg-center w-full
              bg-[url("https://assets.nflxext.com/ffe/siteui/vlv3/dc1cf82d-97c9-409f-b7c8-6ac1718946d6/14a8fe85-b6f4-4c06-8eaf-eccf3276d557/IN-en-20230911-popsignuptwoweeks-perspective_alpha_website_small.jpg"))] 
                 '
                 >
                     <div // overlay
                         className="absolute inset-0 z-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.9)_26%,rgba(0,0,0,0.8965)_30.83%,rgba(0,0,0,0.8861)_35.67%,rgba(0,0,0,0.8688)_40.5%,rgba(0,0,0,0.8444)_45.33%,rgba(0,0,0,0.8132)_50.17%,rgba(0,0,0,0.775)_55%,rgba(0,0,0,0.7368)_59.83%,rgba(0,0,0,0.7056)_64.67%,rgba(0,0,0,0.6812)_69.5%,rgba(0,0,0,0.6639)_74.33%,rgba(0,0,0,0.6535)_79.17%,rgba(0,0,0,0.65)_84%)]"
                     >
-                        <div className=" lg:px-30 sm:px-10 sm:py-6 z-10 md:py-6">
+                        <div className=" lg:px-30 sm:px-10 sm:py-6 z-10 md:py-6 p-5">
                             <div className="relative z-0">
                                 <div className="text-white flex items-center justify-between ">
                                     <svg
@@ -176,13 +176,13 @@ const SmtvLanding = () => {
                                         </b>
 
                                         <div className="text-center mt-6 space-y-3">
-                                            <p className="lg:text-[16px]">
+                                            <p className="text-sm sm:text-base lg:text-lg">
                                                 Ready to watch? Enter your email to create or restart
                                                 your membership.
                                             </p>
-                                            <div className="flex justify-center  lg:w-[588px] sm:h-[60px] md:h-[50px] lg:h-[56px] ">
+                                            <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-3 w-full px-4 sm:px-0">
                                                 <input
-                                                    className="pr-9 pl-3 mr-3 border border-gray-500 rounded sm:w-[250px] lg:w-[366px]"
+                                                    className="w-full sm:flex-1 sm:max-w-xs lg:max-w-md px-3 py-3 sm:py-4 rounded text-white text-sm sm:text-base placeholder-gray-500 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-600"
                                                     type="email"
                                                     name=""
                                                     id=""
@@ -190,9 +190,9 @@ const SmtvLanding = () => {
                                                 />
                                                 <button
                                                     onClick={() => navigate("/Smtv/auth?action=signup")}
-                                                    className="flex px-7 lg:px-6 sm:text-[16px] lg:text-[24px] sm:w-[213px] font-bold rounded justify-center items-center bg-red-600"
+                                                    className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-sm sm:text-base lg:text-lg rounded transition-colors duration-200 flex items-center justify-center gap-2"
                                                 >
-                                                    Get Started ➤{" "}
+                                                    Get Started <span className="text-lg">➤</span>
                                                 </button>
                                             </div>
                                         </div>
@@ -201,42 +201,23 @@ const SmtvLanding = () => {
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="relative h-[6.25rem] z-[5] overflow-x-hidden -mt-8 max-w-[120rem] mx-auto ">
-                    <div
-                        class="absolute inset-0 w-full h-full flex border-[0.25rem] border-transparent
-           rounded-tl-[50%_100%] rounded-tr-[50%_100%] border-b-0
-           bg-[radial-gradient(50%_500%_at_50%_-420%,rgba(64,97,231,0.4)_80%,rgba(0,0,0,0.1)_100%),_black]
-           [background-clip:padding-box]"
-                    >
-                        <div
-                            class="absolute inset-0 -mt-[0.25rem] -z-[1]
-             rounded-tl-[50%_100%] rounded-tr-[50%_100%]
-             bg-[linear-gradient(to right, rgba(255, 0, 115, 1) 16%, rgba(184, 40, 105, 1), rgba(182, 0, 9, 1), rgba(184, 40, 105, 1), rgba(33, 13, 22, 1) 84%);]"
-                        ></div>
+                    <div className="absolute bottom-[-5px] h-15 rounded-t-[160%] bg-black mb-[-50px ]">
+                        <div className=" h-15 w-screen bg-gradient-to-b from-blue-900 to-transparent opacity-70 border-t-5 border-red-700 rounded-t-[150%] "></div>
                     </div>
-                </div>
-
-                <div class="relative h-[6.25rem] z-[5] overflow-x-hidden -mt-8 max-w-[120rem] mx-auto">
-                    <div
-                        class="absolute inset-0 w-full h-full flex border-[1px] border-transparent 
-              rounded-tl-[50%_100%] rounded-tr-[50%_100%] border-b-0
-              bg-gradient-to-b from-indigo-600/30 to-black [background-clip:padding-box]"
-                    ></div>
                 </div>
             </div>
 
-            <div className="flex flex-col px-20 py-10 mt-10 w-[98%] h-[100%] items-center">
+            <div className="flex flex-col lg:px-10 px-2 py-10 w-[98%] h-[100%] items-center">
                 <p className="w-[90%] pb-5 text-left font-bold text-2xl">
                     Trending Now
                 </p>
-                <div className="flex w-[90%] h-[300px] p-3 gap-7 overflow-x-auto scrollbar-hide  ">
+                <div className="flex lg:w-[90%] w-[96%] h-50 lg:h-[300px] p-3 gap-7 overflow-x-auto scrollbar-hide">
                     {trending.map((trend, id) => (
                         <div key={id} className="relative flex flex-shrink-0 ">
                             <img className="rounded-xl  object-cover " src={trend.url} />
 
-                            <p className=" flex absolute left-[-22px] bottom-[2px] text-[100px] font-bold text-white opacity-90 drop-shadow-[0_0_5px_rgba(0,0,0,0.8)]">
+                            <p className=" flex absolute left-[-22px] bottom-[2px] text-[60px] lg:text-[100px] font-bold text-white opacity-90 drop-shadow-[0_0_5px_rgba(0,0,0,0.8)]">
                                 {trend.id}
                             </p>
                         </div>
@@ -244,43 +225,44 @@ const SmtvLanding = () => {
                 </div>
             </div>
 
-            <div className="relative sm:px-12 lg:px-30 py-10 mt-10 w-[98%] h-full sm:h-auto">
+            <div className="relative sm:px-12 px-5 lg:px-30 py-5 w-[98%] h-screen sm:h-auto">
                 <p className="lg:w-[90%] sm:w-[100%] pb-5 text-left font-bold text-2xl">
                     More reasons to join
                 </p>
 
                 <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 h-[315px] sm:h-auto ">
-                    <div className="w-[250px] sm:w-full h-full  rounded-xl p-4 sm:pb-20 bg-[linear-gradient(149deg,#192265_5%,#210e17_99.86%)]">
+                    <div className="lg:w-[250px] sm:w-full h-full 
+                    rounded-xl p-4 sm:pb-20 bg-gradient-to-r from-blue-900/40 to-purple-900/30 backdrop-blur-xl hover:from-blue-900/70 hover:to-purple-900/60 transition-colors duration-300">
                         <p className="pb-5 text-left font-bold text-2xl">
                             Enjoy on your TV
                         </p>
-                        <p className="text-gray-600 font-bold">
+                        <p className="text-gray-400 font-bold">
                             Watch on smart TVs, PlayStation, Xbox, Chromecast, Apple TV,
                             Blu-ray players and more.
                         </p>
                     </div>
-                    <div className="w-[250px] sm:w-full h-full flex-shrink-0 rounded-xl p-4 sm:pb-20 bg-[linear-gradient(149deg,#192265_5%,#210e17_99.86%)]">
+                    <div className="lg:w-[250px] sm:w-full h-full flex-shrink-0 rounded-xl p-4 sm:pb-20 bg-gradient-to-r from-blue-900/40 to-purple-900/30 backdrop-blur-xl hover:from-blue-900/70 hover:to-purple-900/60 transition-colors duration-300">
                         <p className="pb-5 text-left font-bold text-2xl">
                             Download your shows to watch offline
                         </p>
-                        <p className="text-gray-600 font-bold">
+                        <p className="text-gray-400 font-bold">
                             Save your favourites easily and always have something to watch.
                         </p>
                     </div>
-                    <div className="w-[250px] sm:w-full h-full flex-shrink-0 rounded-xl p-4 sm:pb-20 bg-[linear-gradient(149deg,#192265_5%,#210e17_99.86%)]">
+                    <div className="lg:w-[250px] sm:w-full h-full flex-shrink-0 rounded-xl p-4 sm:pb-20 bg-gradient-to-r from-blue-900/40 to-purple-900/30 backdrop-blur-xl hover:from-blue-900/70 hover:to-purple-900/60 transition-colors duration-300">
                         <p className="pb-5 text-left font-bold text-2xl">
                             Watch everywhere
                         </p>
-                        <p className="text-gray-600 font-bold">
+                        <p className="text-gray-400 font-bold">
                             Stream unlimited movies and TV shows on your phone, tablet, laptop
                             and TV.
                         </p>
                     </div>
-                    <div className="w-[250px] sm:w-full h-full flex-shrink-0 rounded-xl p-4 sm:pb-20 bg-[linear-gradient(149deg,#192265_5%,#210e17_99.86%)]">
+                    <div className="lg:w-[250px] sm:w-full h-full flex-shrink-0 rounded-xl p-4 sm:pb-20 bg-gradient-to-r from-blue-900/40 to-purple-900/30 backdrop-blur-xl hover:from-blue-900/70 hover:to-purple-900/60 transition-colors duration-300">
                         <p className="pb-5 text-left font-bold text-2xl">
                             Create profiles for kids
                         </p>
-                        <p className="text-gray-600 font-bold">
+                        <p className="text-gray-400 font-bold">
                             Send kids on adventures with their favourite characters in a space
                             made just for them — free with your membership.
                         </p>
@@ -288,7 +270,7 @@ const SmtvLanding = () => {
                 </div>
             </div>
 
-            <div className=" sm:px-12 lg:px-30 py-10 sm:mt-10 w-[98%] h-full">
+            <div className=" px-5 lg:px-30 w-[98%] h-full">
                 <p className="w-[90%] pb-5 text-left font-bold text-2xl">
                     Frequently Asked Questions
                 </p>
@@ -308,29 +290,29 @@ const SmtvLanding = () => {
                 ))}
             </div>
 
-            <div className="relative flex  flex-col justify-center items-center px-20 sm:px-12 h-full w-[98%] font-bold">
-                <p>
+            <div className="relative flex flex-col justify-center items-center px-5 sm:px-6 lg:px-20 py-10 w-full font-bold">
+                <p className="text-center text-sm sm:text-base lg:text-lg mb-6">
                     Ready to watch? Enter your email to create or restart your membership.
                 </p>
 
-                <div className=" relative flex justify-center lg:w-full w-full h-full lg:px-20 pt-5 ">
+                <div className="relative flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-3 w-full max-w-2xl">
                     <input
-                        className="lg:w-[40%] sm:w-[60%] mr-2 p-4 rounded border border-gray-800"
+                        className=" text-white w-full sm:flex-1 px-3 py-3 sm:py-4 rounded border border-gray-700 text-black text-sm sm:text-base placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600"
                         type="email"
                         name=""
                         placeholder="Email address"
                         id=""
                     />
-                    <button className="md:text:xl lg:text-2xl lg:w-[20%] sm:w-[40%] rounded cursor-pointer">
-                        Get Started ▶
+                    <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-sm sm:text-base lg:text-lg rounded transition-colors duration-200 flex items-center justify-center gap-2">
+                        Get Started <span className="text-lg">▶</span>
                     </button>
                 </div>
             </div>
 
-            <footer className="relative flex flex-col lg:px-30 sm:px-15 py-10 w-full h-full mt-5 text-gray-400  ">
-                <p className="font-bold ">Questions? Call 000-800-919-1743</p>
+            <footer className="relative flex flex-col lg:px-30 px-5 py-10 w-full h-full mt-5 text-gray-400  ">
+                <p className="font-bold pb-5 ">Questions? Call 000-800-919-1743</p>
 
-                <ul className=" font-bold sm:mt-5 lg:mt-10 grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1  sm:gap-2 lg:gap-3 ">
+                <ul className=" font-bold sm:mt-5 lg:mt-10 grid grid-cols-2 lg:grid-cols-4 sm:grid-cols-2 grid-cols-1  sm:gap-2 lg:gap-3 ">
                     <li>FAQ</li>
                     <li>Help Centre</li>
                     <li>Account</li>

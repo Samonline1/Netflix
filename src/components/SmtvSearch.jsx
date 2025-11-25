@@ -271,10 +271,11 @@ const SmtvSearch = () => {
   return (
     <>
       <div className="relative w-full bg-black text-white overflow-hidden">
-        <div className="flex items-center h-full w-full justify-between py-10 px-10 lg:px-30">
+        <div className="flex items-center h-full w-full justify-between lg:py-10 py-5 px-10 lg:px-30">
           <div onClick={() => navigate(`/Smtv/${username}`)}>
-            <svg
-              className="h-7 lg:h-[35px]"
+            <img className="h-20 lg:h-[55px] lg:hidden" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Netflix_2016_N_logo.svg" alt="" srcset="" />
+             <svg
+              className="h-7 lg:h-[35px] hidden lg:block"
               viewBox="0 0 111 30"
               height={"25px"}
               data-uia="netflix-logo"
@@ -312,14 +313,14 @@ const SmtvSearch = () => {
             <p className="flex w-20 items-center justify-center p-2  text-xl rounded-3xl text-white            "
               onClick={searchMovies}>🔍︎</p>
           </div>
-            <div className="flex items-center  w-[30%]">
-              <p onClick={() => navigate(`/Smtv/${username}/favorite`)}
-              >Favorite</p>
+            <div className="flex items-center  w-[32%]">
+              <p className="text-xl" onClick={() => navigate(`/Smtv/${username}/favorite`)}
+              >❤</p>
               <div className='flex justify-center ml-2 gap-2 items-center'
                               onClick={() => navigate(`/Smtv/profile/${username}`)}
 
 >
-                <p className="sm:hidden lg:block" 
+                <p className="hidden sm:flex" 
                 >{LoggedUser}</p>
                 <img className='h-8 w-8 rounded-[50%]' src="https://www.tenforums.com/attachments/user-accounts-family-safety/322690d1615743307t-user-account-image-log-user.png" alt="" />
 
@@ -328,9 +329,9 @@ const SmtvSearch = () => {
           
         </div>
 
-        <div className="flex justify-center items-center  sticky z-50 top-0 morph-blob opacity-80 w-full ">
+        <div className="flex justify-center items-center  sticky z-50 top-0 morph-blob opacity-80 w-screen  ">
           {movies.length > 0 && actors.length > 0 && animes.length > 0 && (
-            <div className=" flex w-[50%] justify-center items-center gap-20 p-5 ">
+            <div className=" flex w-[50%] justify-center items-center gap-7 lg:gap-20 p-5 ">
               <p onClick={() => scrollToSection(movieRef)}>Movies</p> |
               <p onClick={() => scrollToSection(animeRef)}>Anime</p> |
               <p onClick={() => scrollToSection(actorRef)}>Actors</p>
@@ -346,16 +347,16 @@ const SmtvSearch = () => {
             <div className="flex items-center w-full bg-red-700 h-1">
               <p className=" flex items-center ml-10 lg:ml-30 text-2xl bg-black px-5 py-[2px] border-2 border-red-700 rounded-xl font-bold"> Movies </p>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 relative h-full w-full mt-10 px-10 lg:px-30 gap-5">
+            <div className="grid grid-cols-2 lg:grid-cols-5 relative h-full w-screen mt-10 px-10 lg:px-30 gap-5 ">
               {movies.map((movie) => (
                 <div
                   key={movie.show?.id}
-                  className=" relative flex flex-col w-55 h-full p-2 overflow-hidden "
+                  className=" relative flex flex-col w-40 lg:w-55 h-full p-2 overflow-hidden "
                 >
-                  <div className="w-full h-80">
+                  <div className="w-full h-60 w-40 lg:h-80 lg:w-60 cursor-pointer">
                     <img
                       onClick={() => MovieDetails(movie.show.id)}
-                      className="rounded object-cover bg-red-600  w-full h-[300px]"
+                      className="rounded object-cover bg-red-600 w-full h-50 lg:h-[300px]"
                       src={
                         movie.show?.image
                           ? movie.show?.image?.medium
@@ -414,10 +415,10 @@ const SmtvSearch = () => {
 
                   <div key={anime.mal_id}
                     onClick={() => AnimeDetails(anime.mal_id)}
-                    className=" relative flex flex-col w-55 h-full p-2 overflow-hidden "
+                    className=" relative flex flex-col lg:w-55 h-full p-2 overflow-hidden"
                   >
-                    <div className="w-full h-80">
-                      <img className="rounded object-cover bg-red-600  w-full h-[300px]"
+                    <div className="w-full h-60 w-40 lg:h-80 lg:w-60">
+                      <img className="rounded object-cover bg-red-600  w-full h-50 lg:h-[300px]"
                         src={anime.images?.jpg?.image_url || "https://yt3.googleusercontent.com/Z1scaDhrH194d4AygOpJhFzM-ViGyvGLXfB5hGsNNlBRerrx98x9Knszx9-VWizx5lMZPlECOrE=s120-c-k-c0x00ffffff-no-rj"
                         } alt="" srcSet="" />
                     </div>
@@ -519,7 +520,7 @@ const SmtvSearch = () => {
             </div>
             <div
               ref={actorRef}
-              className="grid grid-cols-2 relative h-full w-screen mt-15 px-10 lg:px-30 gap-5"
+              className="lg:grid grid-cols-2 relative h-full w-screen mt-15 px-10 lg:px-30 gap-5 space-y-5 lg:space-y-0 "
 
             >
               {actors.map(

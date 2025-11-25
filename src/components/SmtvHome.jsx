@@ -31,7 +31,7 @@ const SmtvHome = () => {
 
 
   return (
-    <div className='w-screen h-full '>
+    <div className='w-full h-full '>
       <div className='w-full h-full relative'>
 
         <div className='absolute flex w-full h-30 justify-between items-center px-10 py-20 lg:px-30 sm:px-10 sm:py-6 z-10 md:py-6 bg-gradient-to-b from-black to-transparent p-3 backdrop-blur-[1px] bg-gradient-to-b from-black/5 to-transparent '>
@@ -59,27 +59,27 @@ const SmtvHome = () => {
           <div className='flex  justify-between w-[35%] items-center gap-2 '>
 
 <button 
-class="homebutton"
+class="homebutton hidden sm:flex"
  onClick={()=> navigate(`/Smtv/${username}`)}>Home</button>
 
 <button
-class="homebutton"
+class="homebutton hidden sm:flex "
 onClick={()=> navigate(`/Smtv/${username}/search`)}>Search</button>
 
 <button
-class="homebutton"
- onClick={()=> navigate(`/Smtv/${username}/favorite`)}>My List</button>
+class="homebutton hidden sm:flex"
+ onClick={()=> navigate(`/Smtv/${username}/favorite`)}>Fav</button>
 
           </div>
 
           <div className="flex ml-4 gap-5 text-md items-center">
-            <p  className='text-xl '
+            <p  className='text-xl text-gray-200 cursor-pointer'
             onClick={()=> setSearchBar(true)}
             >🔍︎</p>
             <div className='flex gap-2 items-center'
             onClick={()=> navigate(`/Smtv/profile/${username}`)}
             >
-            <p
+            <p className='hidden sm:flex'
             >Hello, {LoggedUser}</p>
                           <img className='h-8 w-8 rounded-[50%]' src="https://www.tenforums.com/attachments/user-accounts-family-safety/322690d1615743307t-user-account-image-log-user.png" alt="" />
 

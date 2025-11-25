@@ -97,7 +97,7 @@ const action = searchParams.get("action");
 
     return (
         <div className=' w-screen h-full text-white'>
-            <div className='relative w-full h-full
+            <div className='relative w-full h-full p-5
         bg-cover bg-center bg-[url("https://assets.nflxext.com/ffe/siteui/vlv3/dc1cf82d-97c9-409f-b7c8-6ac1718946d6/14a8fe85-b6f4-4c06-8eaf-eccf3276d557/IN-en-20230911-popsignuptwoweeks-perspective_alpha_website_small.jpg"))] 
 '>
                 <div className="absolute inset-0 z-0 bg-[linear-gradient(160deg,rgba(0,0,0,0.9)_16%,rgba(0,0,0,0.89)_10.83%,rgba(0,0,0,0.8861)_5.67%,rgba(0,0,0,0.8688)_10.5%,rgba(0,0,0,0.8444)_15.33%,rgba(0,0,0,0.8132)_15.17%,rgba(0,0,0,0.775)_10%,rgba(0,0,0,0.7368)_10.83%,rgba(0,0,0,0.7056)_16.67%,rgba(0,0,0,0.6812)_19.5%,rgba(0,0,0,0.6639)_24.33%,rgba(0,0,0,0.6535)_19.17%,rgba(0,0,0,0.65)_10%)]"
@@ -146,9 +146,10 @@ const action = searchParams.get("action");
                         <form onSubmit={(e) => { submitNow (e)
                         }} className='flex flex-col text-center justify-center mt-5 gap-5 w-[96%]  '
                             action="">
+                                {action?.toLowerCase() === "signup" && (
                                 <input className='p-4 rounded'
                                 type="name" name="" id="1" placeholder='Enter your name'
-                                value={name} onChange={(e)=> (setName(e.target.value))} />
+                                value={name} onChange={(e)=> (setName(e.target.value))} />)}
                             <input className='p-4 rounded'
                                 type="email" name="" id="2" placeholder='Enter your email'
                                 value={email} onChange={(e)=> (setEmail(e.target.value))} />
@@ -191,10 +192,10 @@ const action = searchParams.get("action");
             </div>
 
 
-            <footer className='relative flex flex-col lg:px-30 sm:px-15 py-10 w-full h-full mt-5 text-gray-400  '>
-                <p className='font-bold '>Questions? Call 000-800-919-1743</p>
+            <footer className='relative flex flex-col lg:px-30 sm:px-15 py-10 w-full h-full mt-5 text-gray-400 p-5 '>
+                <p className='font-bold mb-3'>Questions? Call 000-800-919-1743</p>
 
-                <ul className=' font-bold sm:mt-5 lg:mt-10 grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1  sm:gap-2 lg:gap-3 '>
+                <ul className=" font-bold sm:mt-5 lg:mt-10 grid grid-cols-2 lg:grid-cols-4 sm:grid-cols-2 grid-cols-1  sm:gap-2 lg:gap-3 ">
                     <li>FAQ</li>
                     <li>Help Centre</li>
                     <li>Account</li>

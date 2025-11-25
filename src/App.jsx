@@ -8,7 +8,6 @@ import Favorite from "./components/Favorite";
 import Login from "./components/Login";
 import SmtvLanding from "./components/SmtvLanding";
 import SmtvSearch from "./components/SmtvSearch";
-import SmtvNav from "./components/SmtvNav";
 import MovieDetails from "./components/MovieDetails";
 import DefaultHome from "./components/DefaultHome";
 import NotFound from "./components/NotFound";

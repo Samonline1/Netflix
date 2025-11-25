@@ -216,7 +216,7 @@ const DefaultHome = () => {
                             <div key={movie.id} className='h-full w-60'
                             onClick={()=> navigate(`/Smtv/${username}/details/${movie.id}`)}
                             >
-                                <div className="relative h-80 w-60 items-center justify-center">
+                                <div className="relative h-50 w-40 lg:h-80 lg:w-60 items-center justify-center">
                                     <img className=" object-cover object-top w-full h-full  rounded-xl h-full"
                                         src={movie.image ? movie.image : "https://yt3.googleusercontent.com/Z1scaDhrH194d4AygOpJhFzM-ViGyvGLXfB5hGsNNlBRerrx98x9Knszx9-VWizx5lMZPlECOrE=s120-c-k-c0x00ffffff-no-rj"} />
                                 </div>
@@ -249,7 +249,7 @@ const DefaultHome = () => {
                             <div key={index} className='h-full w-60'
                             onClick={()=> navigate(`/Smtv/${username}/anime/${anime.mal_id}`)}>
 
-                                <div className="relative h-80 w-60 items-center justify-center">
+                                <div className="relative h-50 w-40 lg:h-80 lg:w-60 items-center justify-center">
                                     <img className=" object-cover object-top w-full h-full  rounded-xl h-full"
                                         src={ anime.images?.jpg.large_image_url || "https://yt3.googleusercontent.com/Z1scaDhrH194d4AygOpJhFzM-ViGyvGLXfB5hGsNNlBRerrx98x9Knszx9-VWizx5lMZPlECOrE=s120-c-k-c0x00ffffff-no-rj"} />
                                 </div>
@@ -295,7 +295,7 @@ const DefaultHome = () => {
                             onClick={()=> navigate(`/Actor/${username}/${actor.id}`)}
                             key={index} className='h-full w-60'>
                             
-                                <div className="relative h-80 w-60 items-center justify-center">
+                                <div className="relative h-50 w-40 lg:h-80 lg:w-60 items-center justify-center">
                                     <img className=" object-cover object-top w-full h-full  rounded-xl h-full"
                                         src={actor.image ? actor.image : "https://yt3.googleusercontent.com/Z1scaDhrH194d4AygOpJhFzM-ViGyvGLXfB5hGsNNlBRerrx98x9Knszx9-VWizx5lMZPlECOrE=s120-c-k-c0x00ffffff-no-rj"} />
                                 </div>
