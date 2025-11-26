@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addFav, deleteFav } from "../redux/featureSlice";
 import { useSelector } from "react-redux";
-
+import { toast, ToastContainer } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 
 
@@ -24,17 +24,14 @@ const SmtvSearch = () => {
 
   useEffect(() => {
     const Userdetails = UserInfo.find((U) => U?.username?.includes(username));
-
     if (Userdetails) {
       setLoggedUser(Userdetails.name);
-    setSearch(keyword);
     }
-    
+    if (keyword && keyword.trim() !== "") {
+      setSearch(keyword);
+      searchMovies();
+    }
   }, [username, keyword]);
-
-  useEffect(() => {
-    searchMovies()
-  }, [keyword])
 
 
   // useEffect(() => {
@@ -59,16 +56,16 @@ const SmtvSearch = () => {
   const navigate = useNavigate();
 
   const searchMovies = async () => {
-    navigate(`/Smtv/${username}/search`);
+    // navigate(`/Smtv/${username}/search`);
 
     try {
       setLoading(true);
       if (search.trim() === "") {
         setMovies([]);
         setActors([]);
-        setEmpty(true); // if empty after seached wrong :
-        setErrorMsg(false); // do this -- otherwise both will print together until new search
-        //  window.location.reload();
+        setEmpty(true);
+        setErrorMsg(false);
+        // toast.warning("Please enter a search term");
         return;
       }
 
@@ -97,11 +94,13 @@ const SmtvSearch = () => {
           setMovies(URLdata || []);
           setActors(URLdata2 || []);
           setAnime(URLdata3.data || []);
+          toast.success("Search results loaded!", { autoClose: 1000 });
         } else {
           setMovies([]);
           setActors([]);
           setErrorMsg(true);
           setEmpty(false);
+          toast.error(`No results found for "${search}"`);
         }
 
         // let URL = await fetch(`https://api.tvmaze.com/search/shows?q=${search}`);
@@ -137,6 +136,7 @@ const SmtvSearch = () => {
         let URLdata = await URL.json();
         setMovies(URLdata);
         setErrorMsg(false);
+        toast.success("Content found!", { autoClose: 1000 });
       } else if (searchBy === "Actors") {
         setMovies([]);
         setActors([]);
@@ -147,6 +147,7 @@ const SmtvSearch = () => {
         let URLdata = await URL.json();
         setActors(URLdata);
         setErrorMsg(false);
+        toast.success("Actors found!", { autoClose: 1000 });
       } else if (searchBy === "Anime") {
         setMovies([]);
         setActors([]);
@@ -154,10 +155,12 @@ const SmtvSearch = () => {
         let URLdata = await URL.json();
         setAnime(URLdata.data || []);
         setErrorMsg(false);
+        toast.success("Anime found!", { autoClose: 1000 });
         console.log(URLdata);
       }
     } catch (error) {
       console.log("not found");
+      toast.error("Failed to fetch search results. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -239,27 +242,32 @@ const SmtvSearch = () => {
 
     if (filterList >= 0) {
       dispatch(deleteFav({ username: username, favId: fav }));
+      toast.info("Removed from favorites", { autoClose: 1000 });
       console.log("3");
     } else {
       console.log("2");
       const favsearch = async () => {
-        const fav = await fetch(`https://api.tvmaze.com/shows/${favo}`);
-        const favData = await fav.json();
-        console.log(favData.premiered);
-        const favList = {
-          id: favData.id,
-          name: favData.name,
-          img: favData.image?.medium,
-          type: favData.type,
-          genres: favData.genres.join(", "),
-          rating: favData.rating?.average || "N/A",
-          year: favData.premiered
-        };
+        try {
+          const fav = await fetch(`https://api.tvmaze.com/shows/${favo}`);
+          const favData = await fav.json();
+          console.log(favData.premiered);
+          const favList = {
+            id: favData.id,
+            name: favData.name,
+            img: favData.image?.medium,
+            type: favData.type,
+            genres: favData.genres.join(", "),
+            rating: favData.rating?.average || "N/A",
+            year: favData.premiered
+          };
 
-        console.log(favList.rating);
-        
-        dispatch(addFav({ username: username, favorite: favList }));
-
+          console.log(favList.rating);
+          
+          dispatch(addFav({ username: username, favorite: favList }));
+          toast.success("Added to favorites!", { autoClose: 1000 });
+        } catch (error) {
+          toast.error("Failed to add to favorites");
+        }
       };
       favsearch();
     }
@@ -271,6 +279,7 @@ const SmtvSearch = () => {
   return (
     <>
       <div className="relative w-full bg-black text-white overflow-hidden">
+        <ToastContainer position="top-right" />
         <div className="flex items-center h-full w-full justify-between lg:py-10 py-5 px-10 lg:px-30">
           <div onClick={() => navigate(`/Smtv/${username}`)}>
             <img className="h-20 lg:h-[55px] lg:hidden" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Netflix_2016_N_logo.svg" alt="" srcset="" />
@@ -347,16 +356,16 @@ const SmtvSearch = () => {
             <div className="flex items-center w-full bg-red-700 h-1">
               <p className=" flex items-center ml-10 lg:ml-30 text-2xl bg-black px-5 py-[2px] border-2 border-red-700 rounded-xl font-bold"> Movies </p>
             </div>
-            <div className="grid grid-cols-2 lg:grid-cols-5 relative h-full w-screen mt-10 px-10 lg:px-30 gap-5 ">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 relative h-full w-screen mt-10 px-5 sm:px-5 lg:px-30 gap-2 sm:gap-3 lg:gap-5">
               {movies.map((movie) => (
                 <div
                   key={movie.show?.id}
-                  className=" relative flex flex-col w-40 lg:w-55 h-full p-2 overflow-hidden "
+                  className=" relative flex flex-col w-full h-full p-1 sm:p-2 overflow-hidden "
                 >
-                  <div className="w-full h-60 w-40 lg:h-80 lg:w-60 cursor-pointer">
+                  <div className="w-full h-60 sm:h-60 lg:h-80 cursor-pointer">
                     <img
                       onClick={() => MovieDetails(movie.show.id)}
-                      className="rounded object-cover bg-red-600 w-full h-50 lg:h-[300px]"
+                      className="rounded object-cover bg-red-600 w-full h-full"
                       src={
                         movie.show?.image
                           ? movie.show?.image?.medium
@@ -371,7 +380,7 @@ const SmtvSearch = () => {
                     </b>
                     <div className="flex justify-between gap-2 mt-2 text-gray-500">
                       <div>
-                        <p>{formatTime(movie.show?.premiered)}</p>
+                        <p>{movie.show?.premiered ? new Date(movie.show.premiered).getFullYear() : "N/A"}</p>
                       </div>
 
                       <div className="flex gap-4">
@@ -384,7 +393,7 @@ const SmtvSearch = () => {
                               ? "text-xl px-2 flex items-center w-5"
                               : "  text-[30px] py-0 px-2 flex items-center justify-center h-5 w-5"
                           }
-                          onClick={() => setFavorite(movie.show?.id)}
+                          onClick={(e) => { e.stopPropagation(); setFavorite(movie.show?.id); }}
                         >
                           {favorites.some((f) => f.id === movie.show?.id)
                             ? "❤"
@@ -410,15 +419,15 @@ const SmtvSearch = () => {
               <p className=" flex items-center ml-10 lg:ml-30 text-2xl bg-black px-5 py-[2px] border-2 border-red-700 rounded-xl font-bold"> Anime </p>
             </div>
             <div >
-              <div ref={animeRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 relative h-full w-screen mt-10 px-10 lg:px-30 gap-5">
+              <div ref={animeRef} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 relative h-full w-screen mt-10 px-5 sm:px-5 lg:px-30 gap-2 sm:gap-3 lg:gap-5">
                 {animes.map((anime) => (
 
                   <div key={anime.mal_id}
                     onClick={() => AnimeDetails(anime.mal_id)}
-                    className=" relative flex flex-col lg:w-55 h-full p-2 overflow-hidden"
+                    className=" relative flex flex-col w-full h-full p-1 sm:p-2 overflow-hidden"
                   >
-                    <div className="w-full h-60 w-40 lg:h-80 lg:w-60">
-                      <img className="rounded object-cover bg-red-600  w-full h-50 lg:h-[300px]"
+                    <div className="w-full h-60 sm:h-60 lg:h-80">
+                      <img className="relative rounded object-cover w-full h-60 lg:h-60"
                         src={anime.images?.jpg?.image_url || "https://yt3.googleusercontent.com/Z1scaDhrH194d4AygOpJhFzM-ViGyvGLXfB5hGsNNlBRerrx98x9Knszx9-VWizx5lMZPlECOrE=s120-c-k-c0x00ffffff-no-rj"
                         } alt="" srcSet="" />
                     </div>
@@ -429,8 +438,7 @@ const SmtvSearch = () => {
                       </b>
                       <div className="flex  justify-between gap-2 mt-2 text-gray-500">
                         <div>
-                          <p> {anime.aired?.from ? new Date(anime.aired.from).toDateString()
-                            : ""}</p>
+                          <p>{anime.aired?.from ? new Date(anime.aired.from).getFullYear() : "N/A"}</p>
                         </div>
 
                         <div className="flex gap-4">
@@ -439,15 +447,15 @@ const SmtvSearch = () => {
                           <p
                             key={anime.mal_id}
                             className={
-                              favList.some((f) => f.id === anime.mal_id)
-                                ? "text-md "
-                                : "  text-md"
+                              favorites.some((f) => f.id === anime.mal_id)
+                                ? "text-xl px-2 flex items-center w-5"
+                                : "  text-[30px] py-0 px-2 flex items-center justify-center h-5 w-5"
                             }
-                            onClick={() => setFavorite(anime.mal_id)}
+                            onClick={(e) => { e.stopPropagation(); setFavorite(anime.mal_id); }}
                           >
-                            {favList.some((f) => f.id === anime.mal_id)
-                              ? "X"
-                              : "Y"}
+                            {favorites.some((f) => f.id === anime.mal_id)
+                              ? "❤"
+                              : "♡"}
                           </p>
                         </div>
                       </div>

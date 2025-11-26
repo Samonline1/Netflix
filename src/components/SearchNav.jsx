@@ -26,7 +26,7 @@ const SearchNav = () => {
 
 
     return (
-        <div className="flex items-center justify-between w-full mt-[-50px] lg:mt-[-30px] z-10 flex w-full h-20 backdrop-blur-[1px] bg-black/2 ">
+        <div className="flex items-center justify-between w-full mt-[-50px] lg:mt-[-30px] z-10 flex w-full h-20 bg-black/2 ">
             <div onClick={() => navigate(`/Smtv/${username}`)}>
                  <img className="h-10 lg:h-[55px] lg:hidden" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Netflix_2016_N_logo.svg" alt="" srcset="" />
              <svg
@@ -47,7 +47,7 @@ const SearchNav = () => {
             </svg>
             </div>
 
-                <div className="relative flex justify-center items-center w-[60%] lg:w-[50%] mx-10 gap-2 border border-[0.5px] border-gray-900 rounded-xl backdrop-blur-sm bg-black/2 rounded-xl">
+                <div className="relative flex justify-center items-center w-[60%] lg:w-[50%] mx-10 gap-2 border border-[0.5px] border-gray-900 rounded-xl backdrop-blur-sm  rounded-xl">
                     <input
                         className=" w-full outline-none focus:ring-0 h-full rounded-xl p-3 text-gray-200"
                         type="text"

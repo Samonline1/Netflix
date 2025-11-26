@@ -118,7 +118,7 @@ const SmtvLanding = () => {
                                         </g>
                                     </svg>
 
-                                    <div className="flex mr-4">
+                                    <div className="flex lg:mr-4">
                                         <div className="flex border border-gray-500 rounded mr-3 px-4 p-1 justify-center items-center font-bold gap-1">
                                             <svg
                                                 width="16"
@@ -136,7 +136,7 @@ const SmtvLanding = () => {
                                                     fill="currentColor"
                                                 ></path>
                                             </svg>
-                                            <select className="">
+                                            <select className="w-1 lg:w-full">
                                                 <option
                                                     className="bg-black text-white border-none"
                                                     value=""

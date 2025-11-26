@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import SearchNav from "./SearchNav";
 
 const Anime = () => {
     const { id, username } = useParams();
@@ -67,7 +68,7 @@ const Anime = () => {
     }
 
     return (
-        <div className="relative w-full h-full overflow-hidden m-0 p-0">
+        <div className="relative h-full w-screen bg-black">
             <div className="h-full w-full">
                 {checkVid ? (
                     <iframe
@@ -85,18 +86,23 @@ const Anime = () => {
                 )}
             </div>
 
-            <div className="relative flex flex-col justify-center z-10 gap-5 space-y-3 h-full w-screen text-white bg-black/60 p-15">
-                <img
-                    className="h-full w-[40%] lg:w-[15%] justify-end"
-                    src={details.images?.jpg?.large_image_url}
-                    alt={details.title}
-                />
+            <div className="relative flex flex-col justify-center z-10 gap-5 space-y-3 h-full w-screen text-white bg-black/60 p-5 pt-15 lg:p-15 backdrop-blur-[2px]">
 
-                <h1 className="text-3xl font-bold">{details.title}</h1>
+                <SearchNav/>
 
-                <div className="lg:flex flex-wrap gap-5 w-full">
-                    <p>★ {details.score || "Not rated"}</p>
+                <div className="lg:h-80 lg:w-55 w-40 h-53 bg-red-700">
+                    <img
+                        className="h-full w-full justify-end object-cover"
+                        src={details.images?.jpg?.large_image_url}
+                        alt={details.title}
+                    />
+                </div>
+
+                <h1 className="text-3xl lg:text-4xl font-bold">{details.title}</h1>
                     <p>{details.type || "Type N/A"} {details.rating}</p>
+
+                <div className="lg:flex grid grid-cols-4 gap-3 lg:gap-5 w-full lg:border-none border-b pb-5 border-gray-500">
+                    <p>★ {details.score || "Not rated"}</p>
                     <p>{details.genres?.[1]?.name}</p>
                     <p>{details.studios?.[0]?.name || "Studio: N/A"}</p>
                     <p>{details.duration || "Runtime: N/A"}</p>
@@ -106,7 +112,7 @@ const Anime = () => {
 
                 <div className="text-sm max-w-5xl">{details.synopsis}</div>
 
-                <div className="mt-8">
+                <div className="items-start h-full w-full relative">
                     <p className="font-bold text-2xl mb-5">Cast</p>
 
                     <div className="flex items-start w-screen gap-5 overflow-x-auto overflow-y-hidden scrollbar-hide">
@@ -115,9 +121,9 @@ const Anime = () => {
                                 key={`${cast.character.mal_id}-${index}`}
                                 className="flex flex-col items-center gap-2 h-60 w-50"
                             >
-                                <div className="h-40 w-40">
+                                <div className="lg:h-40 lg:w-40 h-30 w-30">
                                     <img
-                                        className="w-full h-full object-cover object-top rounded-full bg-red-700"
+                                        className="w-full h-full object-cover object-top rounded-[50%] bg-red-700"
                                         src={
                                             hoveredIndex === index
                                                 ? cast.character?.images?.jpg?.image_url
@@ -130,7 +136,7 @@ const Anime = () => {
                                 </div>
 
                                 <p
-                                    className="font-bold text-center text-sm"
+                                    className="font-bold text-sm lg:text-lg"
                                     onMouseEnter={() => setHoveredIndex(index)}
                                     onMouseLeave={() => setHoveredIndex(null)}
                                 >

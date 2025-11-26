@@ -34,7 +34,7 @@ const SmtvHome = () => {
     <div className='w-full h-full '>
       <div className='w-full h-full relative'>
 
-        <div className='absolute flex w-full h-30 justify-between items-center px-10 py-20 lg:px-30 sm:px-10 sm:py-6 z-10 md:py-6 bg-gradient-to-b from-black to-transparent p-3 backdrop-blur-[1px] bg-gradient-to-b from-black/5 to-transparent '>
+        <div className='absolute flex w-full h-20 justify-between items-center px-10 lg:py-20 lg:px-30 sm:px-10 py-1 z-10 md:py-6 bg-gradient-to-b from-black to-transparent p-3 backdrop-blur-[1px] bg-gradient-to-b from-black/5 to-transparent '>
 
 
 
@@ -124,33 +124,33 @@ class="homebutton hidden sm:flex"
 
         <div class="scroll-animation flex w-screen gap-0">
   
-  <div class="relative lg:h-[702px] w-screen flex-shrink-0"
+  <div class="relative h-130 items-end sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
   onClick={()=> navigate(`/Smtv/${username}/details/87140`)}
   
   >
     <img class="h-full w-full object-cover block" src="https://occ-0-6245-2164.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXxsD1pl2iFLCR_wYq31-s1nCmjtG0247mfCf5wrOhTJJBCHKitOzHntERYOE76-i-omH4g2bupItBiT5RrxcyjI3G1Jqqz_Sk2S.webp?r=f5f" />
-    <div class="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-black/70 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent"></div>
   </div>
 
-  <div class="relative lg:h-[702px] w-screen flex-shrink-0"
+  <div class="relative h-130 sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
   onClick={()=> navigate(`/Smtv/${username}/details/2993`)}>
     <img class="h-full w-full object-cover block" src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXqhmOK-KBUzjOrk0iJ5gWgxMBnDHXjEiChZUCMhRxfsq-CBzrzlm4zjco7lRKJpuuMhL3i5mkSaZdwdjXpTgrllHr9Y1Pry8oXl.webp?r=608" />
     <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent"></div>
   </div>
 
-  <div class="relative lg:h-[702px] w-screen flex-shrink-0"
+  <div class="relative h-130 sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
   onClick={()=> navigate(`/Smtv/${username}/details/50036`)}>
     <img class="h-full w-full object-cover" src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABaudtqamvNh8KcHWf3cktNN-66448zDt6baD8201rPkhv8EOrFFUKMcgwCS6aMHeBTreNbJP0u9PJ6S6EpblQ2j5D0N0zzzGbsys.webp?r=a7e" />
     <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent"></div>
   </div>
 
-  <div class="relative lg:h-[702px] w-screen flex-shrink-0"
+  <div class="relative h-130 sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
   onClick={()=> navigate(`/Smtv/${username}/details/67252`)}>
     <img class="h-full w-full object-cover" src="https://m.media-amazon.com/images/S/pv-target-images/51c2c75da778c109ccc33ff293ff48f0cccc60b18c3fef8a42afe2a80e07acac._SX1920_FMwebp_.jpg" />
     <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent"></div>
   </div>
 
-  <div class="relative lg:h-[702px] w-screen flex-shrink-0"
+  <div class="relative h-130 sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
   onClick={()=> navigate(`/Smtv/${username}/details/53647`)}>
     <img class="h-full w-full object-cover" src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABTFUb7eF66eBI9-QcgF7miSIruCKoL7yuIKoyCQzj-xMqEiH-xKY_k7XqPKKH3KN3JBuTMVt01qHpKf1XlD5hVZ4SKt-Qq1XehyQ.webp?r=178" />
     <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent">

@@ -33,17 +33,17 @@ const Profile = () => {
   }, [username, userInfo]);
 
   return (
-    <div className="relative flex flex-col justify-center z-10 gap-5 space-y-3 h-full w-screen text-white bg-black/60 p-15">
+    <div className="relative flex flex-col justify-center z-10 gap-5 space-y-6 h-full w-screen text-white bg-black/60 p-10 mt-10  ">
       <SearchNav />
-      <div className="flex w-full gap-5 px-10 lg:px-30">
-        <div className="h-50 w-50 bg-red-700 rounded-[50%] ">
+      <div className="flex w-full gap-5 lg:px-30 ">
+        <div className="lg:h-50 lg:w-50 hidden bg-red-700 rounded-[50%] ">
           <img
-            className="object-cover rounded-[50%]  relative w-full h-full "
+            className="object-cover rounded-[50%]  relative w-full h-full  "
             src="https://www.tenforums.com/attachments/user-accounts-family-safety/322690d1615743307t-user-account-image-log-user.png"
             alt=""
           />
         </div>
-        <div className="flex flex-col gap-3 p-5">
+        <div className="flex flex-col gap-3 p-5 ">
           <p>Hello, {userData?.name} </p>
           <p>Username : {userData?.userName} </p>
           <p>Email Id : {userData?.emailId} </p>
@@ -51,22 +51,22 @@ const Profile = () => {
         </div>
       </div>
 
-      <div className=" flex gap-4 px-10 lg:px-30 w-screen overflow-auto scrollbar-hide">
+      <div className=" flex gap-4 lg:px-30 w-screen overflow-auto scrollbar-hide">
         <button
           onClick={() => navigate(`/Smtv/${username}`)}
-          className="px-4 py-2 rounded-xl"
+          className="px-5 py-2 rounded-xl bg-red-700 hover:bg-red-800"
         >
           Home
         </button>
         <button
           onClick={() => navigate(`/Smtv/${username}/search`)}
-          className="px-4 py-2 rounded-xl"
+          className="px-5 py-2 rounded-xl bg-red-700 hover:bg-red-800"
         >
           Search
         </button>
         <button
           onClick={() => navigate(`/Smtv/${username}/favorite`)}
-          className="px-4 py-2 rounded-xl"
+          className="px-5 py-2 rounded-xl bg-red-700 hover:bg-red-800"
         >
           Favorite
         </button>

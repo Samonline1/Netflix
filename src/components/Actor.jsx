@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import Footer from './footer';
 import SearchNav from './SearchNav';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 
@@ -18,9 +19,10 @@ const Actor = () => {
     async function showActor() {
 
       try {
+        
         const res = await fetch(`https://api.tvmaze.com/people/${id}`)
         const data = await res.json()
-        console.log(data.image.medium)
+        // console.log(data.image.medium)
         console.log(data)
 
         // const name = data.name.charAt(0);
@@ -70,38 +72,39 @@ const Actor = () => {
 
   if (!actor) return <p className="flex justify-center items-center w-screen h-screen bg-black">Searching</p>
 
-  console.log(actor.similiar[0].person.name);
-
-
-
+  // Only log if similiar exists and has at least one item
+  if (actor?.similiar && Array.isArray(actor.similiar) && actor.similiar.length > 0 && actor.similiar[0]?.person?.name) {
+    console.log(actor.similiar[0].person.name);
+  }
 
   return (
     <div className='relative h-full w-screen bg-black'>
+      <ToastContainer position="top-right" />
 
-      <div className='flex flex-col px-20 py-20 gap-10 '>
+      <div className='flex flex-col px-10 lg:px-20 py-20 lg:gap-10 '>
         
         <SearchNav/>
 
-        <div className='flex h-60 lg:h-90 w-full  rounded-xl'>
-          <div key={actor.data?.id} className='flex w-70 lg:w-95 h-full rounded-xl   '>
-            <img className='flex object-cover object-top items-center w-full rounded-xl '
-              src={actor.data?.image ? actor.data?.image.medium : null || "https://yt3.googleusercontent.com/Z1scaDhrH194d4AygOpJhFzM-ViGyvGLXfB5hGsNNlBRerrx98x9Knszx9-VWizx5lMZPlECOrE=s120-c-k-c0x00ffffff-no-rj"
-              } alt="" />
+        <div className='flex h-full lg:h-90 w-full rounded-xl pt-10'>
+          <div key={actor?.data?.id || 'no-id'} className='flex lg:w-80 w-70 lg:h-full h-60 lg:w-60 rounded-xl'>
+            <img
+              className='flex object-cover object-top items-center w-full rounded-xl'
+              src={actor?.data?.image?.medium || actor?.data?.image?.original || "https://yt3.googleusercontent.com/Z1scaDhrH194d4AygOpJhFzM-ViGyvGLXfB5hGsNNlBRerrx98x9Knszx9-VWizx5lMZPlECOrE=s120-c-k-c0x00ffffff-no-rj"}
+              alt={actor?.data?.name || "No image"}
+            />
           </div>
-          <div className=' flex flex-col p-5 w-full justify-end gap-1'>
-            <p className='font-bold text-3xl lg:text-[80px]'>{actor.data?.name}</p>
+          <div className='flex flex-col p-5 w-full justify-end gap-1'>
+            <p className='font-bold text-3xl lg:text-[80px]'>{actor?.data?.name || "Unknown"}</p>
             <div className='text-xl lg:text-2xl text-gray-400'>
-              <p>{actor.cast ? actor.cast?.name : "N/A"}</p>
-              <p>{actor.data?.gender || "N/A"} </p>
+              <p>{actor?.cast?.name || "N/A"}</p>
+              <p>{actor?.data?.gender || "N/A"}</p>
             </div>
-
           </div>
-
         </div>
 
       </div>
 
-      <div className='flex flex-col px-20 py-10 gap-5'>
+      <div className='flex flex-col px-10 lg:px-20 py-10 gap-5'>
         <div className='h-full w-full'>
           <div className='flex bg-red-700 w-2 h-15 '> <h1 className=' flex items-center p-2 ml-5 font-bold'>Overview</h1></div>
         </div>
@@ -114,27 +117,30 @@ const Actor = () => {
         </div>
       </div>
 
-      <div className='flex justify-center h-full w-full px-20 py-10 gap-5'>
+      <div className='flex justify-center h-full w-full px-10 lg:px-20 py-10 gap-5'>
         <div className='flex w-full h-full gap-5 overflow-x-auto overflow-y-hidden scrollbar-hide'>
-          {actor.similiar ? (
-            actor.similiar.slice(1).map((a) => (
-              <div
-                onClick={() => navigate(`/Actor/okSMTVmgluqwu2/${a.person?.id}`)}
-                className='h-full w-60' key={a.person?.id}>
-                <div className="relative h-80 w-60 items-center justify-center">
-                  <img className=" object-cover object-top w-full h-full  rounded-xl h-full"
-                    src={
-                      a.person?.image ? a.person?.image?.medium : a.person?.image?.original || 
-                    "https://yt3.googleusercontent.com/Z1scaDhrH194d4AygOpJhFzM-ViGyvGLXfB5hGsNNlBRerrx98x9Knszx9-VWizx5lMZPlECOrE=s120-c-k-c0x00ffffff-no-rj"} alt="" />
-                  <div className="absolute bottom-0 w-full h-25 bg-gradient-to-t from-black/80 to-transparent flex items-end">
-                    <p className='font-bold absolute bottom-4 left-4'>{a.person?.name}</p>
-
+          {actor?.similiar && Array.isArray(actor.similiar) && actor.similiar.length > 1 ? (
+            actor.similiar.slice(1).map((a, idx) => {
+              const imgSrc = a?.person?.image?.medium || a?.person?.image?.original || "https://yt3.googleusercontent.com/Z1scaDhrH194d4AygOpJhFzM-ViGyvGLXfB5hGsNNlBRerrx98x9Knszx9-VWizx5lMZPlECOrE=s120-c-k-c0x00ffffff-no-rj";
+              return (
+                <div
+                  onClick={() => {
+                    toast.error("Loading actor details...", { autoClose: 1000 });
+                    navigate(`/Actor/okSMTVmgluqwu2/${a?.person?.id}`);
+                  }}
+                  className='h-full w-50 lg:w-60' key={a?.person?.id || idx}>
+                  <div className="relative h-60 w-40 lg:h-80 lg:w-60 items-center justify-center">
+                    <img className="object-cover object-top w-full h-full rounded-xl h-full"
+                      src={imgSrc}
+                      alt={a?.person?.name || "No image"} />
+                    <div className="absolute bottom-0 w-full h-25 bg-gradient-to-t from-black/80 to-transparent flex items-end">
+                      <p className='font-bold absolute bottom-4 left-4'>{a?.person?.name || "Unknown"}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
-          )
-            : "Not avaiable"}
+              );
+            })
+          ) : <div className='text-center w-full py-10 text-gray-400'>Not available</div>}
         </div>
 
       </div>

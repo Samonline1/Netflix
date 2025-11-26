@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { registerUser } from '../redux/featureSlice';
 
-
+import { toast } from 'react-toastify'
 
 
 const Login = () => {
@@ -13,9 +13,9 @@ const Login = () => {
     const navigate = useNavigate();
 
    
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
 const [searchParams] = useSearchParams();
 const action = searchParams.get("action");
@@ -30,28 +30,33 @@ const action = searchParams.get("action");
     function submitNow (e) {
         e.preventDefault() // details will stay cause page will not reload 
         
-        if (password.length < 8) {
-            return console.error("Itna easy password")
+        if (!password || password.length < 8) {
+            toast.error("Password too short — minimum 8 characters")
+            return
         }
 
     // Check for uppercase
     if (!/[A-Z]/.test(password)) {
-        return console.error("Uppercase letter bhi daal bhai (A-Z)!");
+        toast.error("Include at least one uppercase letter (A-Z)")
+        return
     }
 
     // Check for lowercase
     if (!/[a-z]/.test(password)) {
-        return console.error("Lowercase letter bhi zaroori hai (a-z)!");
+        toast.error("Include at least one lowercase letter (a-z)")
+        return
     }
 
     // Check for number
     if (!/[0-9]/.test(password)) {
-        return console.error("Number bhi daal (0-9)!");
+        toast.error("Include at least one number (0-9)")
+        return
     }
 
     // Check for special character
     if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-        return console.error("Ek special character bhi chahiye (!, @, #, etc.)");
+        toast.error("Include at least one special character (!, @, #, etc.)")
+        return
     }
 
         
@@ -82,10 +87,10 @@ const action = searchParams.get("action");
              
             
            if (emailExist && passMatch) {
-                console.log("Welcome back", emailExist.username)
+                toast.success(`Welcome back ${emailExist.username}`, { autoClose: 1000 })
                 navigate(`/Smtv/${emailExist.username}`)
             } else {
-                console.log("tu kon hai be??")
+                toast.error('Invalid email or password')
             }
         }
         

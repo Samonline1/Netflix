@@ -84,7 +84,7 @@ const MovieDetails = () => {
                 <div className="h-full w-full">
                     {checkVid ? (
                         <iframe
-                            className="absolute top-1/2 left-1/2 w-[190.78%] h-[177.78%] sm:h-[150%] sm:w-[500%]  -translate-x-1/2 -translate-y-1/2  "
+                            className="absolute top-1/3 lg:top-1/2 left-1/2 lg:w-[190.78%] lg:h-[177.78%] h-[100%] w-[500%]  -translate-x-1/2 -translate-y-1/2  "
                             src={`https://www.youtube.com/embed/${checkVid.VideoId}?autoplay=1&mute=1&loop=1&playlist=${checkVid.VideoId}&controls=0&modestbranding=1&showinfo=0`}
                             allow="autoplay; fullscreen; encrypted-media"
                         />
@@ -97,28 +97,27 @@ const MovieDetails = () => {
                     )}
                 </div>
 
-                <div className="relative flex flex-col justify-center z-10 gap-5 space-y-3 h-full w-screen text-white bg-black/60 p-5 pt-15 lg:p-15">
+                <div className="relative flex flex-col justify-center z-10 gap-5 space-y-3 h-full w-screen text-white bg-black/60 p-5 pt-15 lg:p-15 backdrop-blur-[2px]">
+                    <SearchNav />
 
-
-                    <SearchNav/>
-
-
-
-                    <img
-                        className=" h-full w-[40%] lg:w-[15%] justify-end"
-                        src={details.image?.medium}
-                        alt={details.name}
-                    />
+                    <div className="lg:h-80 lg:w-55 w-40 h-53 bg-red-700">
+                        <img
+                            className=" h-full w-full justify-end object-cover"
+                            src={details.image?.medium}
+                            alt={details.name}
+                        />
+                    </div>
 
                     <h1>{details.name}</h1>
+                    <p>{details.genres?.join(", ")}</p>
 
-                    <div className=" lg:flex gap-5 w-full  ">
+                    <div className=" lg:flex grid grid-cols-4 gap-3 lg:gap-5 w-full lg:border-none border-b pb-5 border-gray-500 ">
                         <p>★ {details.rating?.average || "Not rated"}</p>
+
                         <p>{details.type || "Type N/A"}</p>
-                        <p>{details.genres?.join(", ")}</p>
                         <p>{details.webChannel?.name || "Network : N/A"}</p>
                         {/* <p>{details.network?.name || "Network : N/A"}</p> */}
-                        <p> {details.network?.country?.name}</p>
+                        <p> {details.network?.country?.name || "Country : N/A"}</p>
                         <p>{details.averageRuntime || "Runtime: N/A"} m</p>
                         <p>{details.status}</p>
                         <p>{details.language}</p>
@@ -126,10 +125,10 @@ const MovieDetails = () => {
                     </div>
                     <div dangerouslySetInnerHTML={{ __html: details.summary }} />
 
-                    <div className=" items-start h-full w-full  relative">
+                    <div className=" items-start h-full w-full  relative ">
                         <p className="font-bold text-2xl mb-5">Cast</p>
 
-                        <div className="flex items-start  w-screen gap-5 overflow-x-auto overflow-y-hidden scrollbar-hide ">
+                        <div className="flex items-start  w-screen gap-5 overflow-x-auto overflow-y-hidden scrollbar-hide">
                             {Cast.map((cast) => (
                                 <div
                                     key={cast.person?.id}
@@ -138,7 +137,7 @@ const MovieDetails = () => {
                                     }
                                     className="flex flex-col items-center gap-2 h-60 w-50"
                                 >
-                                    <div className="lg:h-40 lg:w-40 h-20 w-20 ">
+                                    <div className="lg:h-40 lg:w-40 h-30 w-30 ">
                                         <img
                                             key={cast.person.id}
                                             className="w-full h-full object-cover object-top rounded-[50%] bg-red-700"
