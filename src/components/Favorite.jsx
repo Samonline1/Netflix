@@ -4,6 +4,8 @@ import { deleteFav } from '../redux/featureSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import SearchNav from './SearchNav';
 import Footer from './footer';
+import { toast, ToastContainer } from 'react-toastify';
+
 
 
 
@@ -24,27 +26,31 @@ const Favorite = () => {
     dispatch(deleteFav({ username : username, favId : idnum}))
     // dispatch(deleteFav(idnum))
     console.log("yah tak sirf")
+        const name = favorites.find((f) => f.id === idnum);
+
+    toast.error(`Deleted favorite ${name.name} for user ${username}`, { autoClose: 1000 });
+    
   }
 
 
   return (
 
-    <div className='w-screen h-full p-10 gap-10 bg-black'>
-    <SearchNav/>
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 relative h-full w-full mt-10 lg:px-25 gap-5">
+    <div className='w-screen h-full p-5 pt-15 gap-10 bg-black px-7 lg:px-20 py-20'>
+    <SearchNav />
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 relative h-full w-full mt-10 sm:px-5 lg:px-30 gap-2 sm:gap-3 lg:gap-5">
 
       {favorites &&
         favorites.map((fav, index) =>
 
          <div
   key={index}
-  className="relative flex flex-col w-60 h-full p-2 overflow-hidden "
+  className="relative flex flex-col w-45 h-80 lg:w-60 lg:h-full p-2 overflow-hidden "
 >
   {/* Image section */}
-  <div className="relative w-full h-80">
+  <div className="relative w-40 h-[90%] lg:w-60 lg:h-full">
     <img
       onClick={() => navigate(`/Smtv/${username}/details/${fav.id}`)}
-      className="object-cover bg-red-600 w-full h-[300px] cursor-pointer w-full h-80"
+      className="object-cover bg-red-600 w-full h-full cursor-pointer w-full h-80"
       src={
         fav.img
           ? fav.img
@@ -54,7 +60,7 @@ const Favorite = () => {
     />
     <h1
       className="absolute top-1 right-2 cursor-pointer hover:scale-110 transition-transform"
-      onClick={() => deleteF(fav?.id)}
+      onClick={() => deleteF(fav?.id, fav?.name)}
     >
     ❤
     </h1>
@@ -94,6 +100,11 @@ const Favorite = () => {
 </div>
         )}
     </div>
+    {favorites.length === 0 && (
+      <div className="flex flex-col items-center justify-center w-full h-full mt-20 mb-20">
+        <h2 className="text-3xl font-bold text-gray-300 mb-4">  No Favorites Yet</h2>
+        <p className="text-lg text-gray-500 text-center">
+          You haven't added any favorites yet. Start exploring and add some! </p>  </div>) }
     <Footer/>
     </div>
   )

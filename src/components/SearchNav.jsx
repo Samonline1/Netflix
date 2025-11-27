@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { FaHeart,FaSearch } from "react-icons/fa";
+
 
 const SearchNav = () => {
     const [input, setInput] = useState('');
@@ -56,17 +58,17 @@ const SearchNav = () => {
                         onChange={(e) => setInput(e.target.value)}
                     />
                     <button
-                        className="flex w-14 items-center justify-center p-2 px-3 text-xl"
+                        className="flex w-14 items-center justify-center p-2 px-3 text-lg"
                         onClick={() => navigate(`/Smtv/${username}/search/${input}`)}
                     >
-                        🔍︎
+                        <FaSearch />
                     </button>
                 </div>
         
 
 
             <div className="flex items-center justify-center lg:gap-5 w-[20%]">
-                <p className="text-xl" onClick={() => navigate(`/Smtv/${username}/favorite`)}>❤</p>
+                <p className="text-xl" onClick={() => navigate(`/Smtv/${username}/favorite`)}><FaHeart/></p>
                 <div
                     className="flex w-full justify-center ml-2 gap-2 items-center"
                     onClick={() => navigate(`/Smtv/profile/${username}`)}

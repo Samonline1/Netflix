@@ -56,10 +56,10 @@ export const featureSlice = createSlice({
             // const findFav = state.favorites.findIndex((f)=> f.id === id);
 
             if (user && user.favorites) {
-                const name = user.favorites.find((f) => f.id === favId);
+                // const name = user.favorites.find((f) => f.id === favId);
                 user.favorites = user.favorites.filter((f) => f.id !== favId);
                 localStorage.setItem("users", JSON.stringify(state.users));
-                console.log(`Deleted favorite ${name.name} for user ${username}`);
+                // console.log(`Deleted favorite ${name.name} for user ${username}`);
             }
         },
 
