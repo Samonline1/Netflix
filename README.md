@@ -11,6 +11,18 @@ This project uses the TVMaze and Jikan APIs to fetch show, people, and anime dat
 Live demo: https://samonline1.github.io/Netflix/ (deployed via `gh-pages`)
 
 ---
+## Screenshot
+
+![Landing page](image-7.png)
+![Auth page](image-8.png)
+![Home](image-1.png)
+![Search](image-2.png)
+![Movie details](image-3.png)
+![Actor details](image-4.png)
+![Favorites](image-5.png)
+![Account](image-6.png)
+---
+
 
 ## Key Features
 
@@ -22,6 +34,7 @@ Live demo: https://samonline1.github.io/Netflix/ (deployed via `gh-pages`)
 - Responsive layout and Tailwind CSS styling
 
 ---
+
 
 ## Tech Stack
 
