@@ -4,7 +4,8 @@ import { deleteFav } from '../redux/featureSlice';
 import { useNavigate, useParams } from 'react-router-dom';
 import SearchNav from './SearchNav';
 import Footer from './footer';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { IoHeartDislikeSharp } from "react-icons/io5";
 
 
 
@@ -37,7 +38,7 @@ const Favorite = () => {
 
     <div className='w-screen h-full p-5 pt-15 gap-10 bg-black px-7 lg:px-20 py-20'>
     <SearchNav />
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 relative h-full w-full mt-10 sm:px-5 lg:px-30 gap-2 sm:gap-3 lg:gap-5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 relative h-full w-full mt-10 sm:px-5 lg:px-10 gap-2 sm:gap-3 lg:gap-10">
 
       {favorites &&
         favorites.map((fav, index) =>
@@ -58,12 +59,12 @@ const Favorite = () => {
       }
       alt=""
     />
-    <h1
-      className="absolute top-1 right-2 cursor-pointer hover:scale-110 transition-transform"
+    <p
+      className="absolute top-2 right-3 cursor-pointer hover:scale-110 transition-transform text-2xl p-2 shaddow-lg rounded-full bg-black/50 text-red-600"
       onClick={() => deleteF(fav?.id, fav?.name)}
     >
-    ❤
-    </h1>
+    <IoHeartDislikeSharp/>
+    </p>
   </div>
 
   {/* Info section */}

@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoIosHeart } from "react-icons/io";
 import { FaHeart,FaSearch } from "react-icons/fa";
+import Icon from '/src/assets/user.png'
 
 
 
@@ -26,39 +27,24 @@ const SmtvSearch = () => {
   const UserInfo = useSelector((state) => state.note.users);
 
   useEffect(() => {
-  const Userdetails = UserInfo.find((U) => U?.username?.includes(username));
-  if (Userdetails) {
-    setLoggedUser(Userdetails.name);
-  }
+    const Userdetails = UserInfo.find((U) => U?.username?.includes(username));
+    if (Userdetails) {
+      setLoggedUser(Userdetails.name);
+    }
 
-  if (keyword && keyword.trim() !== "") {
-    setSearch(keyword);  
-  }
-}, [username, keyword]);
-
-// runs on search change
-useEffect(() => {
-  if (search && search.trim() !== "") {
-    searchMovies();
-  }
-}, [search]);
-
-
-
-  // useEffect(() => {
-
-  //   setSearch(keyword);
-
-  //   if (keyword != "") {
-  //     searchMovies();
-  //     setEmpty(false)
-  //   }
-  // }, [keyword])
+    if (keyword && keyword.trim() !== "") {
+      setSearch(keyword);
+      // initial search from URL keyword should run only once
+      // we'll trigger it immediately below (see refs added later)
+    }
+  }, [username, keyword]);
 
 
   const movieRef = useRef(null);
   const actorRef = useRef(null);
   const animeRef = useRef(null);
+  const initialSearchTriggered = useRef(false);
+  const skipNextDebounce = useRef(false);
 
   const scrollToSection = (sectionRef) => {
     sectionRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -113,31 +99,6 @@ useEffect(() => {
           setEmpty(false);
           toast.error(`No results found for "${search}"`);
         }
-
-        // let URL = await fetch(`https://api.tvmaze.com/search/shows?q=${search}`);
-        // let URLdata = await URL.json();
-        // console.log(URLdata)
-
-        //     if (URLdata.length > 0) {
-        //     setMovies(URLdata)
-        //     setActors([])
-        //     setErrorMsg(false)
-        //     } else {
-        //     URL = await fetch(`https://api.tvmaze.com/search/people?q=${search}`)
-        //     URLdata = await URL.json();
-
-        //         if (URLdata.length > 0) {
-        //         setActors(URLdata)
-        //         setMovies([])
-        //         setErrorMsg(false)
-        //         console.log(URLdata)
-        //         } else {
-        //         setMovies([])
-        //         setActors([])
-        //         setErrorMsg(true) // if error after empty :
-        //         setEmpty(false) // do this -- otherwise both will print together until new search
-        //     }
-        // }
       } else if (searchBy === "Content") {
         setMovies([]);
         setActors([]);
@@ -179,7 +140,6 @@ useEffect(() => {
 
   // nav is redering on details page from details page
   // again search should redirect to main page with results and redirect to details if clicked : on every search navigate to main page ?
-  //
 
   const MovieDetails = (MovieId) => {
     navigate(`/Smtv/${username}/details/${MovieId}`);
@@ -203,30 +163,6 @@ useEffect(() => {
     setActors([]);
     setAnime([]);
   }
-  // let URL = await fetch(`https://api.tvmaze.com/search/shows?q=${search}`);
-  // let URLdata = await URL.json();
-  // console.log(URLdata)
-
-  // if (URLdata.length > 0) {
-  //     setMovies(URLdata)
-  //     setActors([])
-  //     setErrorMsg(false)
-  // } else {
-  //     URL = await fetch(`https://api.tvmaze.com/search/people?q=${search}`)
-  //     URLdata = await URL.json();
-
-  //     if (URLdata.length > 0) {
-  //         setActors(URLdata)
-  //         setMovies([])
-  //         setErrorMsg(false)
-  //         console.log(URLdata)
-  //     } else {
-  //         setMovies([])
-  //         setActors([])
-  //         setErrorMsg(true) // if error after empty :
-  //         setEmpty(false) // do this -- otherwise both will print together until new search
-  //     }
-  // }
 
   function formatTime(theDate) {
     const date = new Date(theDate);
@@ -311,9 +247,11 @@ useEffect(() => {
     <>
       <div className="relative w-full bg-black text-white overflow-hidden">
         <ToastContainer position="top-right" />
-        <div className="flex items-center h-full w-full justify-between lg:py-10 py-5 px-10 lg:px-30">
+        
+                  <div className="flex items-center lg:justify-between justify-center lg:w-full w-full lg:mt-5 z-10  flex h-20 bg-black/2 lg:py-10 py-10 mt-2 px-5 lg:px-20 ">
+
           <div onClick={() => navigate(`/Smtv/${username}`)}>
-            <img className="h-20 lg:h-[55px] lg:hidden" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Netflix_2016_N_logo.svg" alt="" srcset="" />
+            <img className="h-18 lg:h-[55px] lg:hidden" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Netflix_2016_N_logo.svg" alt="" srcset="" />
              <svg
               className="h-7 lg:h-[35px] hidden lg:block"
               viewBox="0 0 111 30"
@@ -331,7 +269,7 @@ useEffect(() => {
               </g>
             </svg>
           </div>
-          <div className="flex w-full mx-9 justify-center items-center gap-2 border border-[0.5px] border-gray-900 rounded-xl">
+          <div className="flex w-full lg:w-[50%] mx-9 justify-center items-center gap-2 border border-[0.5px] border-gray-900 rounded-xl">
             <select className="w-4 mx-2 sm:mx-2"
               id="filter"
               value={searchBy}
@@ -343,7 +281,7 @@ useEffect(() => {
               <option value="Anime">Anime</option>
             </select>
             <input
-              className="w-full border-gray-900 outline-none focus:ring-0"
+              className="w-full py-2 border-gray-900 outline-none focus:ring-0"
 
               type="text"
               placeholder="Search..."
@@ -353,7 +291,7 @@ useEffect(() => {
             <p className="flex w-20 items-center justify-center p-2  text-lg rounded-3xl text-white            "
               onClick={searchMovies}><FaSearch/></p>
           </div>
-            <div className="flex items-center w-[40%] gap-2">
+            <div className="flex items-center lg:w-[10%] w-[40%] gap-5">
               <p className="text-xl" onClick={() => navigate(`/Smtv/${username}/favorite`)}
               ><FaHeart />
 
@@ -362,9 +300,9 @@ useEffect(() => {
                               onClick={() => navigate(`/Smtv/profile/${username}`)}
 
 >
-                <p className="hidden sm:flex" 
-                >{LoggedUser}</p>
-                <img className='h-8 w-8 rounded-[50%]' src="https://www.tenforums.com/attachments/user-accounts-family-safety/322690d1615743307t-user-account-image-log-user.png" alt="" />
+                <p className="hidden sm:flex font-bold" 
+                >Hello,{LoggedUser}</p>
+                <img className='h-8 w-8 rounded-[50%] bg-red-800' src={Icon} alt="" />
 
               </div>            
             </div>
@@ -496,57 +434,6 @@ useEffect(() => {
                   </div>
 
 
-
-                  //   <div
-                  //     className="flex rounded-2xl w-100 h-60 border border-opacity-75 border-gray-700 bg-gray-900 overflow-hidden p-2"
-                  //     key={anime.mal_id}
-                  //     onClick={() => navigate(`/details/${anime.mal_id}`)}
-                  //   >
-                  //     {/* Image Section */}
-                  //     <div className="relative w-[40%] h-[98%] overflow-hidden p-1">
-                  //       <img
-                  //         className="rounded-2xl h-full w-full object-cover"
-                  //         src={
-                  //           anime.images?.jpg?.image_url ||
-                  //           "https://via.placeholder.com/150"
-                  //         }
-                  //         alt={anime.title}
-                  //       />
-                  //     </div>
-
-                  //     {/* Info Section */}
-                  //     <div className="pl-4 pr-3 space-y-1 w-[60%] mt-2 h-full">
-                  //       <p>{anime.status}</p>
-
-                  //       <p className="mt-2">{anime.type}</p>
-
-                  //       <b>
-                  //         <p className="py-3 text-xl h-[30%]">{anime.title}</p>
-                  //       </b>
-
-                  //       <div className="flex rounded bg-gray-900 whitespace-nowrap">
-                  //         <p>Rating {anime.score || "N/A"} ⭐</p>
-                  //         <p className="ml-3">
-                  //           {anime.aired?.from
-                  //             ? new Date(anime.aired.from).toDateString()
-                  //             : ""}
-                  //         </p>
-                  //       </div>
-
-                  //       <div className="flex gap-3 text-md my-3 flex-wrap w-full">
-                  //         {anime.genres?.slice(0, 2).map((genre, index) => (
-                  //           <p
-                  //             key={index}
-                  //             className="border border-green-500 rounded px-2 bg-green-800"
-                  //           >
-                  //             {genre.name}
-                  //           </p>
-                  //         ))}
-                  //       </div>
-                  //     </div>
-                  //   </div>
-
-
                 ))}
               </div>
             </div>
@@ -588,24 +475,6 @@ useEffect(() => {
 
                   </div>
 
-                  // <div
-                  //   key={actor.person?.id}
-                  //   className="flex rounded-2xl p-3 border border-gray-700 bg-gray-900"
-                  //   onClick={() => navigate(`/Actor/${actor.person?.id}`)}
-                  // >
-                  //   <img
-                  //     className=" w-40 h-40 rounded-full object-cover"
-                  //     src={actor.person?.image?.medium}
-                  //     alt=""
-                  //   />
-                  //   <b>
-                  //     <p className="p-3 text-[30px]" key={actor.person?.id}>
-                  //       {actor.person?.name}
-                  //     </p>
-                  //   </b>
-                  // </div>
-
-
                 )
               )}
             </div>
@@ -623,9 +492,3 @@ useEffect(() => {
 
 export default SmtvSearch;
 
-// {empty ? `${empty} "jfij"` : "jfjrjf"}
-// {movies.length > 0 && "ok paaji"}
-
-// {search != '' && "paaji"}</p>) - working but while typing activates
-// want to execute it when search box is empty and button clicked ---- (<p> {empty === true && "paaji"}</p>) working ✅
-// Using onclick on input text field!! - Use on change instead

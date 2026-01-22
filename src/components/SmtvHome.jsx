@@ -4,27 +4,30 @@ import { NavLink } from 'react-router-dom';
 import { useNavigate, useParams } from 'react-router-dom';
 import DefaultHome from './DefaultHome';
 import Footer from './footer';
+import Icon from '/src/assets/user.png'
+import Sicon from '/src/assets/search.png'
+
 
 const SmtvHome = () => {
 
   const [LoggedUser, setLoggedUser] = useState()
   const { username } = useParams();
-  const [searchBar, setSearchBar] = useState(false)
-  console.log(searchBar);
-  
-  const [input, setInput] = useState()
+  // const [searchBar, setSearchBar] = useState(false)
+  // console.log(searchBar);
+
+  // const [input, setInput] = useState()
 
   const UserInfo = useSelector((state) => state.note.users)
 
   useEffect(() => {
     const Userdetails = UserInfo.find((U) => U?.username?.includes(username))
-   
+
     if (Userdetails) {
-       setLoggedUser(Userdetails.name)
-    console.log(Userdetails);
-    
+      setLoggedUser(Userdetails.name)
+      console.log(Userdetails);
+
     }
-   
+
   }, [UserInfo])
 
   const navigate = useNavigate();
@@ -39,7 +42,9 @@ const SmtvHome = () => {
 
 
           <div>
-            <svg className='lg:h-[35px]'
+            <img className="h-10 lg:h-[55px] lg:hidden" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Netflix_2016_N_logo.svg" alt="" srcset="" />
+            <svg
+              className="h-7 lg:h-[35px] hidden lg:block"
               viewBox="0 0 111 30"
               height={"25px"}
               data-uia="netflix-logo"
@@ -58,7 +63,7 @@ const SmtvHome = () => {
 
           <div className='flex  justify-between w-[35%] items-center gap-2 '>
 
-<button 
+            {/* <button 
 class="homebutton hidden sm:flex"
  onClick={()=> navigate(`/Smtv/${username}`)}>Home</button>
 
@@ -68,22 +73,25 @@ onClick={()=> navigate(`/Smtv/${username}/search`)}>Search</button>
 
 <button
 class="homebutton hidden sm:flex"
- onClick={()=> navigate(`/Smtv/${username}/favorite`)}>Fav</button>
+ onClick={()=> navigate(`/Smtv/${username}/favorite`)}>Fav</button> */}
 
           </div>
 
           <div className="flex ml-4 gap-5 text-md items-center">
-            <p  className='text-xl text-gray-200 cursor-pointer'
-            onClick={()=> setSearchBar(true)}
-            >🔍︎</p>
+            <p className='text-xl text-gray-200 cursor-pointer'
+              // onClick={()=> setSearchBar(true)}
+              onClick={() => navigate(`/Smtv/${username}/search`)}
+
+            ><img className='h-8 w-8 rounded-[50%] bg-red-800' src={Sicon} alt="" srcset="" /></p>
             <div className='flex gap-2 items-center'
-            onClick={()=> navigate(`/Smtv/profile/${username}`)}
+              onClick={() => navigate(`/Smtv/${username}/search`)}
             >
-            <p className='hidden sm:flex'
-            >Hello, {LoggedUser}</p>
-                          <img className='h-8 w-8 rounded-[50%]' src="https://www.tenforums.com/attachments/user-accounts-family-safety/322690d1615743307t-user-account-image-log-user.png" alt="" />
+              <p className='hidden sm:flex'
+              >Hello, {LoggedUser}</p>
+              <img className='h-8 w-8 rounded-[50%] bg-red-800' src={Icon} alt="" />
 
             </div>
+            
           </div>
         </div>
 
@@ -91,9 +99,9 @@ class="homebutton hidden sm:flex"
 
         {/* <div className='flex overflow-x-auto scrollbar-hide '> */}
         <div class="w-screen h-full overflow-hidden ">
-          
 
-{searchBar && (
+
+          {/* {searchBar && (
   
           <div className='flex justify-center items-center  absolute z-10 h-13 w-full mt-30 '>
             <div className='flex justify-start items-center w-[50%] gap-2 border border-[0.5px] border-gray-900 rounded-xl backdrop-blur-sm bg-black/2 rounded-xl'>
@@ -101,9 +109,9 @@ class="homebutton hidden sm:flex"
             <button className='flex w-14 items-center justify-center p-2 px-3 text-xl outline-none focus:ring-0' onClick={()=> navigate(`/Smtv/${username}/search/${input}`)}>🔍︎</button>
           </div>
           </div>)
-          }
-          
-          
+          } */}
+
+
           {/* <div class="scroll-animation flex w-screen gap-0  ">
 
             <img className="h-[702px] w-screen flex-shrink-0 object-cover block" src="https://occ-0-6245-2164.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXxsD1pl2iFLCR_wYq31-s1nCmjtG0247mfCf5wrOhTJJBCHKitOzHntERYOE76-i-omH4g2bupItBiT5RrxcyjI3G1Jqqz_Sk2S.webp?r=f5f" />
@@ -120,49 +128,49 @@ class="homebutton hidden sm:flex"
 
         </div> */}
 
-  
-
-        <div class="scroll-animation flex w-screen gap-0">
-  
-  <div class="relative h-130 items-end sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
-  onClick={()=> navigate(`/Smtv/${username}/details/87140`)}
-  
-  >
-    <img class="h-full w-full object-cover block" src="https://occ-0-6245-2164.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXxsD1pl2iFLCR_wYq31-s1nCmjtG0247mfCf5wrOhTJJBCHKitOzHntERYOE76-i-omH4g2bupItBiT5RrxcyjI3G1Jqqz_Sk2S.webp?r=f5f" />
-    <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent"></div>
-  </div>
-
-  <div class="relative h-130 sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
-  onClick={()=> navigate(`/Smtv/${username}/details/2993`)}>
-    <img class="h-full w-full object-cover block" src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXqhmOK-KBUzjOrk0iJ5gWgxMBnDHXjEiChZUCMhRxfsq-CBzrzlm4zjco7lRKJpuuMhL3i5mkSaZdwdjXpTgrllHr9Y1Pry8oXl.webp?r=608" />
-    <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent"></div>
-  </div>
-
-  <div class="relative h-130 sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
-  onClick={()=> navigate(`/Smtv/${username}/details/50036`)}>
-    <img class="h-full w-full object-cover" src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABaudtqamvNh8KcHWf3cktNN-66448zDt6baD8201rPkhv8EOrFFUKMcgwCS6aMHeBTreNbJP0u9PJ6S6EpblQ2j5D0N0zzzGbsys.webp?r=a7e" />
-    <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent"></div>
-  </div>
-
-  <div class="relative h-130 sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
-  onClick={()=> navigate(`/Smtv/${username}/details/67252`)}>
-    <img class="h-full w-full object-cover" src="https://m.media-amazon.com/images/S/pv-target-images/51c2c75da778c109ccc33ff293ff48f0cccc60b18c3fef8a42afe2a80e07acac._SX1920_FMwebp_.jpg" />
-    <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent"></div>
-  </div>
-
-  <div class="relative h-130 sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
-  onClick={()=> navigate(`/Smtv/${username}/details/53647`)}>
-    <img class="h-full w-full object-cover" src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABTFUb7eF66eBI9-QcgF7miSIruCKoL7yuIKoyCQzj-xMqEiH-xKY_k7XqPKKH3KN3JBuTMVt01qHpKf1XlD5hVZ4SKt-Qq1XehyQ.webp?r=178" />
-    <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent">
-<img src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABZyOthTbqP0lKDk4RMY_d_osHdCvHVA61Xt7-hBWI4TkHsbptPli42zFj8yRdJOHxcWwyHuHNd-xjPyKyjeUV5j30LHGsjuj.webp?r=5ff" alt="" srcSet="" />
-<img src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABXG5gmlIhSDh9F5SdDQdBne7h4_X54BQqzS_bAwMmlgTD9uZTKR9pEl7h7UkRvMhwJ0_HwqYNaKLXgBh2g5sxbWzIp3Tn597sA.webp?r=d59" alt="" srcSet="" />    </div>
-  </div>
-
-</div>
 
 
+          <div class="scroll-animation flex w-screen gap-0">
 
-        {/* <div className='h-full w-screen'>
+            <div class="relative h-130 items-end sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
+              onClick={() => navigate(`/Smtv/${username}/details/87140`)}
+
+            >
+              <img class="h-full w-full object-cover block" src="https://occ-0-6245-2164.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXxsD1pl2iFLCR_wYq31-s1nCmjtG0247mfCf5wrOhTJJBCHKitOzHntERYOE76-i-omH4g2bupItBiT5RrxcyjI3G1Jqqz_Sk2S.webp?r=f5f" />
+              <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent"></div>
+            </div>
+
+            <div class="relative h-130 sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
+              onClick={() => navigate(`/Smtv/${username}/details/2993`)}>
+              <img class="h-full w-full object-cover block" src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXqhmOK-KBUzjOrk0iJ5gWgxMBnDHXjEiChZUCMhRxfsq-CBzrzlm4zjco7lRKJpuuMhL3i5mkSaZdwdjXpTgrllHr9Y1Pry8oXl.webp?r=608" />
+              <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent"></div>
+            </div>
+
+            <div class="relative h-130 sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
+              onClick={() => navigate(`/Smtv/${username}/details/50036`)}>
+              <img class="h-full w-full object-cover" src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABaudtqamvNh8KcHWf3cktNN-66448zDt6baD8201rPkhv8EOrFFUKMcgwCS6aMHeBTreNbJP0u9PJ6S6EpblQ2j5D0N0zzzGbsys.webp?r=a7e" />
+              <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent"></div>
+            </div>
+
+            <div class="relative h-130 sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
+              onClick={() => navigate(`/Smtv/${username}/details/67252`)}>
+              <img class="h-full w-full object-cover" src="https://m.media-amazon.com/images/S/pv-target-images/51c2c75da778c109ccc33ff293ff48f0cccc60b18c3fef8a42afe2a80e07acac._SX1920_FMwebp_.jpg" />
+              <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent"></div>
+            </div>
+
+            <div class="relative h-130 sm:h-screen lg:h-[702px] w-screen flex-shrink-0"
+              onClick={() => navigate(`/Smtv/${username}/details/53647`)}>
+              <img class="h-full w-full object-cover" src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABTFUb7eF66eBI9-QcgF7miSIruCKoL7yuIKoyCQzj-xMqEiH-xKY_k7XqPKKH3KN3JBuTMVt01qHpKf1XlD5hVZ4SKt-Qq1XehyQ.webp?r=178" />
+              <div class="absolute bottom-0 left-0 w-full h-[500px] bg-gradient-to-t from-black/70 to-transparent">
+                <img src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABZyOthTbqP0lKDk4RMY_d_osHdCvHVA61Xt7-hBWI4TkHsbptPli42zFj8yRdJOHxcWwyHuHNd-xjPyKyjeUV5j30LHGsjuj.webp?r=5ff" alt="" srcSet="" />
+                <img src="https://occ-0-6245-2186.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABXG5gmlIhSDh9F5SdDQdBne7h4_X54BQqzS_bAwMmlgTD9uZTKR9pEl7h7UkRvMhwJ0_HwqYNaKLXgBh2g5sxbWzIp3Tn597sA.webp?r=d59" alt="" srcSet="" />    </div>
+            </div>
+
+          </div>
+
+
+
+          {/* <div className='h-full w-screen'>
   <div className='flex w-full snap-x snap-mandatory '>
     <div className='h-screen w-screen bg-red-700 flex-shrink-0 snap-center box-ani   '>
         <img className="h-full w-full flex-shrink-0 object-cover" src="https://occ-0-6245-2164.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABXxsD1pl2iFLCR_wYq31-s1nCmjtG0247mfCf5wrOhTJJBCHKitOzHntERYOE76-i-omH4g2bupItBiT5RrxcyjI3G1Jqqz_Sk2S.webp?r=f5f"/> 
@@ -173,7 +181,7 @@ class="homebutton hidden sm:flex"
   </div>
 </div> */}
 
-</div>
+        </div>
       </div>
 
       <DefaultHome />

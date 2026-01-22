@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { FaHeart,FaSearch } from "react-icons/fa";
+import Icon from '/src/assets/user.png'
 
 
 const SearchNav = () => {
@@ -28,7 +29,7 @@ const SearchNav = () => {
 
 
     return (
-        <div className="flex items-center justify-between w-full mt-[-50px] lg:mt-[-30px] z-10 flex w-full h-20 bg-black/2 ">
+        <div className="flex items-center justify-between w-full mt-[-50px] lg:mt-[-30px] z-10 px-1 flex h-20 bg-black/2 ">
             <div onClick={() => navigate(`/Smtv/${username}`)}>
                  <img className="h-10 lg:h-[55px] lg:hidden" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Netflix_2016_N_logo.svg" alt="" srcset="" />
              <svg
@@ -49,7 +50,7 @@ const SearchNav = () => {
             </svg>
             </div>
 
-                <div className="relative flex justify-center items-center w-[60%] lg:w-[50%] mx-10 gap-2 border border-[0.5px] border-gray-900 rounded-xl backdrop-blur-sm  rounded-xl">
+                <div className="relative flex justify-center items-center w-[50%] lg:w-[50%] mx-2 gap-2 border border-[0.5px] border-gray-900  backdrop-blur-[0.5px]  rounded-xl">
                     <input
                         className=" w-full outline-none focus:ring-0 h-full rounded-xl p-3 text-gray-200"
                         type="text"
@@ -67,16 +68,17 @@ const SearchNav = () => {
         
 
 
-            <div className="flex items-center justify-center lg:gap-5 w-[20%]">
+            <div className="flex items-center justify-center lg:gap-5 w-[23%]">
                 <p className="text-xl" onClick={() => navigate(`/Smtv/${username}/favorite`)}><FaHeart/></p>
                 <div
                     className="flex w-full justify-center ml-2 gap-2 items-center"
                     onClick={() => navigate(`/Smtv/profile/${username}`)}
                 >
-                    <p className="hidden lg:block">{LoggedUser}</p>
+                    <p className="hidden sm:flex font-bold" 
+                >Hello,{LoggedUser}</p>
                     <img
-                        className="h-8 w-8  rounded-[50%]"
-                        src="https://www.tenforums.com/attachments/user-accounts-family-safety/322690d1615743307t-user-account-image-log-user.png"
+                        className="h-8 w-8  rounded-[50%] bg-red-800"
+                        src={Icon}
                         alt=""
                     />
                 </div>
